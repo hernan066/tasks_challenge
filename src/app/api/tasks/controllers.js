@@ -1,4 +1,4 @@
-import db from "../../db/sqlite";
+import db from "../../../db/sqlite";
 import { NextResponse } from "next/server";
 
 export function getAllTasks() {
@@ -46,6 +46,10 @@ export function updateTask({ id, title, description, completed }) {
 }
 
 export function deleteTask(id) {
+  const taskToDelete = db.prepare("SELECT * FROM tasks WHERE id = ?").get(id);
+  if (!taskToDelete) {
+    return NextResponse.json({ message: "Task not found" }, { status: 404 });
+  }
   db.prepare("DELETE FROM tasks WHERE id = ?").run(id);
   return NextResponse.json({}, { status: 204 });
 }

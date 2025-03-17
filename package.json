@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "better-sqlite3": "^11.9.0",
+    "formik": "^2.4.6",
     "next": "15.2.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sqlite3": "^5.1.7"
+    "react-toastify": "^11.0.5",
+    "sqlite3": "^5.1.7",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
