@@ -30,7 +30,7 @@ Este proyecto es una aplicación de gestión de tareas desarrollada con **Next.j
 
 ```sh
  git clone https://github.com/hernan066/tasks_challenge.git
- cd gestor-tareas
+ cd tasks_challenge
 ```
 
 ### 2️⃣ Instalar Dependencias

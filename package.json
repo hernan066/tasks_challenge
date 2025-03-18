@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:init": "node src/db/setup.js"
   },
   "dependencies": {
     "better-sqlite3": "^11.9.0",
