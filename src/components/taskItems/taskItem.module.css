@@ -1,0 +1,42 @@
+.taskItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #ccc;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s;
+}
+.taskItem:hover {
+  background-color: var(--color-white2);
+}
+.completed {
+  font-weight: 400;
+  margin-bottom: 5px;
+  text-decoration: line-through;
+}
+.incomplete {
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+.taskItem p {
+  color: var(--color-dark-gray);
+  font-size: 14px;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+}
+.taskItem button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.taskItem button:hover {
+  background-color: var(--color-dark-gray);
+  color: var(--color-white);
+}

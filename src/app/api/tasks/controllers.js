@@ -27,22 +27,25 @@ export function createTask({ title, description }) {
 }
 
 export function updateTask({ id, title, description, completed }) {
-  // Si 'completed' es undefined, lo dejamos en false
-
   const taskToUpdate = db.prepare("SELECT * FROM tasks WHERE id = ?").get(id);
   if (!taskToUpdate) {
     return NextResponse.json({ message: "Task not found" }, { status: 404 });
   }
 
-  completed = completed !== undefined ? completed : taskToUpdate.completed;
+  completed =
+    completed !== undefined ? (completed ? 1 : 0) : taskToUpdate.completed;
 
   db.prepare(
     "UPDATE tasks SET title = ?, description = ?, completed = ? WHERE id = ?"
-  ).run(title, description || taskToUpdate.description, completed, id);
+  ).run(
+    title || taskToUpdate.title,
+    description || taskToUpdate.description,
+    completed,
+    id
+  );
 
   const updatedTask = db.prepare("SELECT * FROM tasks WHERE id = ?").get(id);
-
-  return NextResponse.json(updatedTask || { message: "Task not found" });
+  return NextResponse.json(updatedTask);
 }
 
 export function deleteTask(id) {
@@ -51,5 +54,6 @@ export function deleteTask(id) {
     return NextResponse.json({ message: "Task not found" }, { status: 404 });
   }
   db.prepare("DELETE FROM tasks WHERE id = ?").run(id);
-  return NextResponse.json({}, { status: 204 });
+
+  return new NextResponse(null, { status: 204 });
 }
