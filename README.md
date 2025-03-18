@@ -19,7 +19,8 @@ Este proyecto es una aplicación de gestión de tareas desarrollada con **Next.j
 
 ## 📸 Capturas de Pantalla
 
-_Aquí puedes subir imágenes del proyecto_
+![Lista de tareas](https://ik.imagekit.io/mrprwema7/2_30PRXYfdnR.jpeg?updatedAt=1742263223485)
+![Nueva tareas](https://ik.imagekit.io/mrprwema7/1_PYtg4_Qfx.jpeg?updatedAt=1742263223817)
 
 ---
 
@@ -28,7 +29,7 @@ _Aquí puedes subir imágenes del proyecto_
 ### 1️⃣ Clonar el Repositorio
 
 ```sh
- git clone https://github.com/tuusuario/gestor-tareas.git
+ git clone https://github.com/hernan066/tasks_challenge.git
  cd gestor-tareas
 ```
 
@@ -90,16 +91,3 @@ _Aquí puedes subir imágenes del proyecto_
 `DELETE /api/tasks/:id`
 
 ---
-
-## ✨ Contribuir
-
-1. Haz un fork del repositorio.
-2. Crea una rama nueva (`git checkout -b feature-nueva-funcionalidad`).
-3. Realiza cambios y haz un commit (`git commit -m "Agregada nueva funcionalidad"`).
-4. Envía un pull request.
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la licencia MIT. ¡Siéntete libre de usarlo y mejorarlo! 🚀
