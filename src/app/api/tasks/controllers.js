@@ -1,5 +1,19 @@
+import { validationSchema } from "@/lib/validations";
 import db from "../../../db/sqlite";
 import { NextResponse } from "next/server";
+
+async function validateData(data) {
+  try {
+    await validationSchema.validate(data, { abortEarly: false });
+    return { valid: true, errors: null };
+  } catch (validationErrors) {
+    const errors = validationErrors.inner.map((error) => ({
+      field: error.path,
+      message: error.message,
+    }));
+    return { valid: false, errors };
+  }
+}
 
 export function getAllTasks() {
   const tasks = db.prepare("SELECT * FROM tasks ORDER BY createdAt DESC").all();
@@ -13,9 +27,10 @@ export function getTaskById(id) {
   return NextResponse.json(task);
 }
 
-export function createTask({ title, description }) {
-  if (!title)
-    return NextResponse.json({ message: "Title is required" }, { status: 400 });
+export async function createTask({ title, description }) {
+  const { valid, errors } = await validateData({ title, description });
+  if (!valid) return NextResponse.json({ errors }, { status: 400 });
+
   const stmt = db.prepare(
     "INSERT INTO tasks (title, description, completed) VALUES (?, ?, ?)"
   );
@@ -26,11 +41,14 @@ export function createTask({ title, description }) {
   return NextResponse.json(task, { status: 201 });
 }
 
-export function updateTask({ id, title, description, completed }) {
+export async function updateTask({ id, title, description, completed }) {
   const taskToUpdate = db.prepare("SELECT * FROM tasks WHERE id = ?").get(id);
   if (!taskToUpdate) {
     return NextResponse.json({ message: "Task not found" }, { status: 404 });
   }
+
+  const { valid, errors } = await validateData({ title, description });
+  if (!valid) return NextResponse.json({ errors }, { status: 400 });
 
   completed =
     completed !== undefined ? (completed ? 1 : 0) : taskToUpdate.completed;

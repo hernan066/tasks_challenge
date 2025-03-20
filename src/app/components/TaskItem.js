@@ -1,5 +1,5 @@
 "use client";
-import styles from "./taskItem.module.css";
+import styles from "../styles/taskItem.module.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";

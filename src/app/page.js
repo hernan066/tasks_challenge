@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import TaskItem from "../components/taskItems/TaskItem";
-import styles from "./page.module.css";
-import TaskForm from "@/components/taskForm/TaskForm";
+import styles from "./styles/page.module.css";
+import { TaskList } from "./components/TaskList";
+import { TaskForm } from "./components/TaskForm";
 
-export default function TaskList() {
+export default function HomePage() {
   const [tasks, setTasks] = useState([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
@@ -93,20 +93,12 @@ export default function TaskList() {
           </button>
         </div>
 
-        <ul className={styles.taskList}>
-          {filteredTasks.map((task) => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              onUpdate={toggleTaskCompletion}
-              onDelete={deleteTask}
-              onEdit={() => openModal(task)}
-            />
-          ))}
-          {filteredTasks.length === 0 && (
-            <p className={styles.noTasksMessage}>No hay tareas que mostrar</p>
-          )}
-        </ul>
+        <TaskList
+          filteredTasks={filteredTasks}
+          toggleTaskCompletion={toggleTaskCompletion}
+          deleteTask={deleteTask}
+          openModal={openModal}
+        />
       </section>
 
       {modalOpen && (

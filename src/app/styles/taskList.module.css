@@ -1,0 +1,10 @@
+.taskList {
+  list-style: none;
+  padding: 0;
+}
+.noTasksMessage {
+  margin-top: 200px;
+  text-align: center;
+  font-size: 24px;
+  color: var(--color-gray);
+}

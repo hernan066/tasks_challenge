@@ -1,27 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import styles from "./taskForm.module.css";
 import { AiOutlineClose } from "react-icons/ai";
+import { validationSchema } from "@/lib/validations";
+import styles from "../styles/taskForm.module.css";
 
-const validationSchema = Yup.object({
-  title: Yup.string()
-    .trim()
-    .required("El título es obligatorio")
-    .min(3, "El título debe tener al menos 3 caracteres")
-    .matches(
-      /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/,
-      "El título contiene caracteres inválidos"
-    ),
-  description: Yup.string()
-    .trim()
-    .max(255, "La descripción no puede superar los 255 caracteres")
-    .matches(
-      /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,!?\s]*$/,
-      "La descripción contiene caracteres inválidos"
-    ),
-});
-
-export default function TaskForm({ task, onClose, refreshTasks }) {
+export const TaskForm = ({ task, onClose, refreshTasks }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
@@ -91,4 +73,4 @@ export default function TaskForm({ task, onClose, refreshTasks }) {
       </div>
     </div>
   );
-}
+};
