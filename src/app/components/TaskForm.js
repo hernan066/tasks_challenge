@@ -2,8 +2,18 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { AiOutlineClose } from "react-icons/ai";
 import { validationSchema } from "@/lib/validations";
 import styles from "../styles/taskForm.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal } from "@/store/uiSlice";
+import { addTask, updateTask } from "@/store/taskSlice";
 
-export const TaskForm = ({ task, onClose, refreshTasks }) => {
+export const TaskForm = () => {
+  const dispatch = useDispatch();
+  const { modalTask: task } = useSelector((state) => state.ui);
+
+  const onClose = () => {
+    dispatch(closeModal());
+  };
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
@@ -18,18 +28,13 @@ export const TaskForm = ({ task, onClose, refreshTasks }) => {
           }}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
-            const method = task ? "PUT" : "POST";
-            const url = task ? `/api/tasks/${task.id}` : "/api/tasks";
-
-            await fetch(url, {
-              method,
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(values),
-            });
-
-            refreshTasks();
-            onClose();
+            if (task) {
+              await dispatch(updateTask({ id: task.id, ...values }));
+            } else {
+              await dispatch(addTask(values));
+            }
             setSubmitting(false);
+            onClose();
           }}
         >
           {({ isSubmitting }) => (

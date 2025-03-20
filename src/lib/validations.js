@@ -13,7 +13,7 @@ export const validationSchema = Yup.object({
     .trim()
     .max(255, "La descripción no puede superar los 255 caracteres")
     .matches(
-      /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,!?\\s]*$/,
+      /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,!? \n]+$/, // 🔹 Se añade `\n` para permitir saltos de línea
       "La descripción contiene caracteres inválidos"
     ),
 });
