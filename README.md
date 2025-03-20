@@ -10,6 +10,8 @@ Este proyecto es una aplicación de gestión de tareas desarrollada con **Next.j
 ✅ **Base de datos SQLite** para persistencia liviana y rápida.  
 ✅ **API REST** para la gestión de tareas con CRUD.  
 ✅ **Formik + Yup** para validación de formularios.  
+✅ **Redux Toolkit** para la gestión eficiente del estado global.
+✅ **Uso de createAsyncThunk en Redux** para llamadas asincrónicas a la API.  
 ✅ **CSS Modules** para estilos aislados.  
 ✅ **Filtro y búsqueda de tareas** por nombre o estado (pendiente/completado).  
 ✅ **Modal con animaciones** para crear y editar tareas.  
