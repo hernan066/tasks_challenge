@@ -8,3 +8,9 @@
   font-size: 24px;
   color: var(--color-gray);
 }
+.loadingMessage {
+  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

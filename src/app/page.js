@@ -20,14 +20,16 @@ export default function HomePage() {
     dispatch(openModal(task));
   };
 
-  const filteredTasks = tasks.filter(
-    (task) =>
-      (filter === "all" ||
-        (filter === "completed" && task.completed) ||
-        (filter === "pending" && !task.completed)) &&
-      (task.title.toLowerCase().includes(search.toLowerCase()) ||
-        task.description.toLowerCase().includes(search.toLowerCase()))
-  );
+  const filteredTasks =
+    tasks &&
+    tasks.filter(
+      (task) =>
+        (filter === "all" ||
+          (filter === "completed" && task.completed) ||
+          (filter === "pending" && !task.completed)) &&
+        (task.title.toLowerCase().includes(search.toLowerCase()) ||
+          task.description.toLowerCase().includes(search.toLowerCase()))
+    );
 
   return (
     <main className={styles.container}>

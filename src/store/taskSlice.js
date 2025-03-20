@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-//Obtener tareas desde la API
+// Obtener tareas desde la API
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
   const response = await fetch("/api/tasks");
   return response.json();
 });
 
-//Agregar una tarea
+// Agregar una tarea
 export const addTask = createAsyncThunk("tasks/addTask", async (taskData) => {
   const response = await fetch("/api/tasks", {
     method: "POST",
@@ -16,7 +16,7 @@ export const addTask = createAsyncThunk("tasks/addTask", async (taskData) => {
   return response.json();
 });
 
-//Actualizar una tarea
+// Actualizar una tarea
 export const updateTask = createAsyncThunk(
   "tasks/updateTask",
   async (taskData) => {
@@ -29,7 +29,7 @@ export const updateTask = createAsyncThunk(
   }
 );
 
-//Eliminar una tarea
+// Eliminar una tarea
 export const deleteTask = createAsyncThunk("tasks/deleteTask", async (id) => {
   await fetch(`/api/tasks/${id}`, { method: "DELETE" });
   return id;
@@ -37,7 +37,7 @@ export const deleteTask = createAsyncThunk("tasks/deleteTask", async (id) => {
 
 const taskSlice = createSlice({
   name: "tasks",
-  initialState: { tasks: [], loading: false, filter: "all", search: "" },
+  initialState: { tasks: null, loading: false, filter: "all", search: "" },
   reducers: {
     setFilter: (state, action) => {
       state.filter = action.payload;
@@ -48,18 +48,26 @@ const taskSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      .addCase(fetchTasks.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(fetchTasks.fulfilled, (state, action) => {
         state.tasks = action.payload;
+        state.loading = false;
       })
+
       .addCase(addTask.fulfilled, (state, action) => {
         state.tasks.push(action.payload);
       })
+
       .addCase(updateTask.fulfilled, (state, action) => {
         const index = state.tasks.findIndex(
           (task) => task.id === action.payload.id
         );
         if (index !== -1) state.tasks[index] = action.payload;
       })
+
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.tasks = state.tasks.filter((task) => task.id !== action.payload);
       });
